@@ -1,38 +1,42 @@
 @extends('layouts.app')
 
-@section('title', 'SINE | Mi Perfil')
+@section('title', 'Login Seguro | Mi Perfil')
 
 @section('content')
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 20px;">
-        <h1 style="margin: 0; color: #1e293b;">Mi Perfil</h1>
-        <button onclick="window.history.back()" class="btn" style="width: auto; padding: 8px 15px; background: #64748b; font-size: 14px;">Volver</button>
+    {{-- Page Header --}}
+    <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+            <h1>Mi Perfil</h1>
+            <p>Información personal asociada a tu cuenta.</p>
+        </div>
+        <button onclick="window.history.back()" class="btn btn-ghost" style="margin-top: 4px;">
+            ← Volver
+        </button>
     </div>
-    
-    <p style="color: #475569;">Esta es una vista puramente informativa sobre los datos de tu cuenta.</p>
-    
-    <div style="background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #cbd5e1; margin-top: 20px;">
-        <h3 style="margin-top: 0; color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">Información Personal</h3>
-        
-        <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
-            <div>
-                <strong style="color: #64748b; font-size: 12px; text-transform: uppercase;">Nombre Completo</strong>
-                <div id="profileName" style="font-size: 18px; font-weight: bold; color: #0f172a;">Cargando...</div>
-            </div>
-            
-            <div>
-                <strong style="color: #64748b; font-size: 12px; text-transform: uppercase;">Correo Electrónico</strong>
-                <div id="profileEmail" style="font-size: 16px; color: #334155;">Cargando...</div>
-            </div>
-            
-            <div>
-                <strong style="color: #64748b; font-size: 12px; text-transform: uppercase;">Estado de la Cuenta</strong>
-                <div id="profileStatus" style="font-size: 16px; color: #334155;">Cargando...</div>
-            </div>
-            
-            <div>
-                <strong style="color: #64748b; font-size: 12px; text-transform: uppercase;">Fecha de Creación</strong>
-                <div id="profileCreated" style="font-size: 16px; color: #334155;">Cargando...</div>
-            </div>
+    <hr class="page-header-divider" style="margin-bottom: 24px;">
+
+    <div class="card" style="max-width: 600px;">
+        <div class="card-title" style="margin-bottom: 6px;">Información Personal</div>
+        <div class="card-desc" style="margin-bottom: 20px;">Esta vista es informativa. Los datos provienen de tu sesión activa.</div>
+
+        <div class="profile-field">
+            <span class="profile-field-label">Nombre Completo</span>
+            <span id="profileName" class="profile-field-value">Cargando...</span>
+        </div>
+
+        <div class="profile-field">
+            <span class="profile-field-label">Correo Electrónico</span>
+            <span id="profileEmail" class="profile-field-value">Cargando...</span>
+        </div>
+
+        <div class="profile-field">
+            <span class="profile-field-label">Estado de la Cuenta</span>
+            <span id="profileStatus" class="profile-field-value">Cargando...</span>
+        </div>
+
+        <div class="profile-field">
+            <span class="profile-field-label">Fecha de Creación</span>
+            <span id="profileCreated" class="profile-field-value">Cargando...</span>
         </div>
     </div>
 @endsection

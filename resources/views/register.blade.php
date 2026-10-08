@@ -4,34 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="Crea tu cuenta en Login Seguro con protección de múltiples factores.">
     <title>Crear Cuenta | Login Seguro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY', '6LfHwwctAAAAALHKhTXYSHFwLqpSQ2_1yUp8tOkq') }}"></script>
 </head>
 <body>
 
     <div class="register-container fade-in">
-        <div class="logo">Login Seguro<br><span>Crear cuenta nueva</span></div>
 
+        {{-- Logo --}}
+        <div class="logo">Login Seguro</div>
+        <span class="logo-subtitle">Crea tu cuenta nueva · Cifrado de extremo a extremo</span>
+
+        {{-- Alert --}}
         <div id="alertBox" class="alert hidden"></div>
 
         <form id="registerForm" method="POST" action="/api/register" novalidate>
             @csrf
+
+            {{-- Nombre --}}
             <div class="form-group">
-                <div id="nameError" class="error-message">Falta el nombre</div>
-                <label for="name">Nombre Completo</label>
-                <input type="text" id="name" placeholder="Juan Pérez">
+                <label for="name">Nombre completo</label>
+                <input type="text" id="name" placeholder="Juan Pérez" autocomplete="name">
+                <div id="nameError" class="error-message">El nombre es requerido.</div>
             </div>
 
+            {{-- Email --}}
             <div class="form-group">
-                <div id="emailError" class="error-message">Correo inválido</div>
-                <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" placeholder="tu@correo.com">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" placeholder="tu@correo.com" autocomplete="email">
+                <div id="emailError" class="error-message">Introduce un correo válido.</div>
             </div>
 
+            {{-- Password --}}
             <div class="form-group">
-                <div id="passwordError" class="error-message">Contraseña inválida</div>
-                <label for="password">Contraseña Segura</label>
+                <label for="password">Contraseña segura</label>
                 <div class="password-wrapper">
                     <input type="password" id="password" placeholder="••••••••" autocomplete="new-password">
                     <button type="button" id="togglePassword" class="toggle-password" title="Mostrar contraseña" aria-label="Mostrar contraseña">
@@ -44,70 +53,52 @@
                         </svg>
                     </button>
                 </div>
-                
-                <!-- Reactive Password Rules -->
+
+                {{-- Password rules --}}
                 <div id="passwordRules" class="password-rules">
-                    <div class="rules-title">Requisitos de la contraseña:</div>
+                    <div class="rules-title">Requisitos de la contraseña</div>
                     <ul class="rules-list">
                         <li id="rule-length" class="rule-item">
-                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                            </svg>
-                            <svg class="icon-met" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
+                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                            <svg class="icon-met"   viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Mínimo 8 caracteres
                         </li>
                         <li id="rule-lowercase" class="rule-item">
-                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                            </svg>
-                            <svg class="icon-met" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
+                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                            <svg class="icon-met"   viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Al menos una letra minúscula
                         </li>
                         <li id="rule-uppercase" class="rule-item">
-                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                            </svg>
-                            <svg class="icon-met" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
+                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                            <svg class="icon-met"   viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Al menos una letra mayúscula
                         </li>
                         <li id="rule-number" class="rule-item">
-                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                            </svg>
-                            <svg class="icon-met" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
+                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                            <svg class="icon-met"   viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Al menos un número
                         </li>
                         <li id="rule-special" class="rule-item">
-                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                            </svg>
-                            <svg class="icon-met" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
+                            <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                            <svg class="icon-met"   viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Al menos un carácter especial (!@#$%^&*...)
                         </li>
                     </ul>
-                    
+
                     <div class="strength-container">
                         <div class="strength-bar">
                             <div id="strengthProgress" class="strength-progress"></div>
                         </div>
-                        <span id="strengthText" class="strength-text">Seguridad: Incompleta</span>
+                        <span id="strengthText" class="strength-text">Seguridad: —</span>
                     </div>
                 </div>
+
+                <div id="passwordError" class="error-message">La contraseña no cumple los requisitos.</div>
             </div>
 
+            {{-- Confirm Password --}}
             <div class="form-group">
-                <div id="passwordConfirmationError" class="error-message">Las contraseñas no coinciden</div>
-                <label for="password_confirmation">Confirmar Contraseña</label>
+                <label for="password_confirmation">Confirmar contraseña</label>
                 <div class="password-wrapper">
                     <input type="password" id="password_confirmation" placeholder="••••••••">
                     <button type="button" id="togglePasswordConfirmation" class="toggle-password" title="Mostrar contraseña" aria-label="Mostrar contraseña">
@@ -120,11 +111,12 @@
                         </svg>
                     </button>
                 </div>
+                <div id="passwordConfirmationError" class="error-message">Las contraseñas no coinciden.</div>
             </div>
-            
+
             <button type="submit" class="btn" id="registerBtn">Crear Cuenta</button>
 
-            <a href="/login" class="auth-link">¿Ya tienes cuenta? Inicia Sesión</a>
+            <a href="/login" class="auth-link">¿Ya tienes cuenta? <span>Inicia Sesión</span></a>
         </form>
     </div>
 
