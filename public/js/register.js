@@ -96,21 +96,21 @@ function validatePasswordRules() {
     
     strengthProgress.style.width = `${percent}%`;
     
-    let color = '#ef4444'; // Red
-    let text = 'Muy insegura';
-    
+    let color = '#a12b2b'; // Red
+    let text = 'Muy débil';
+
     if (metCount === 2) {
-        color = '#f97316'; // Orange
-        text = 'Insegura';
+        color = '#b4541a'; // Orange
+        text = 'Débil';
     } else if (metCount === 3) {
-        color = '#eab308'; // Yellow
+        color = '#9a6b12'; // Ochre
         text = 'Aceptable';
     } else if (metCount === 4) {
-        color = '#3b82f6'; // Blue
+        color = '#4f6f62'; // Grey green
         text = 'Buena';
     } else if (metCount === 5) {
-        color = '#10b981'; // Emerald Green
-        text = 'Segura y robusta';
+        color = '#2f5d50'; // Green
+        text = 'Fuerte';
     }
     
     strengthProgress.style.backgroundColor = color;

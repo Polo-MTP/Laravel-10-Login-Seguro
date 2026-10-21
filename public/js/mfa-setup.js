@@ -10,7 +10,7 @@ input.addEventListener('input', async (e) => {
     if (input.value.length === 6) {
         console.log("6 dígitos detectados. Bloqueando input y enviando petición...");
         input.disabled = true;
-        statusMsg.style.color = '#3b82f6';
+        statusMsg.style.color = '#5c5b57';
         statusMsg.textContent = 'Verificando...';
 
         console.log("Llamando a la API /api/mfa/setup/confirm...");
@@ -30,23 +30,23 @@ input.addEventListener('input', async (e) => {
         console.log("Datos JSON:", data);
 
         if (response.ok && data.success) {
-            input.style.borderColor = '#10b981';
-            statusMsg.style.color = '#10b981';
-            statusMsg.innerHTML = '¡Verificado! ✔️ Redirigiendo...';
+            input.style.borderColor = '#2f5d50';
+            statusMsg.style.color = '#2f5d50';
+            statusMsg.textContent = 'Listo, código correcto. Redirigiendo...';
             
             setTimeout(() => {
                 window.location.href = '/login';
             }, 2000);
         } else {
-            input.style.borderColor = '#ef4444';
-            statusMsg.style.color = '#ef4444';
+            input.style.borderColor = '#a12b2b';
+            statusMsg.style.color = '#a12b2b';
             statusMsg.textContent = data.message || 'Código incorrecto';
             input.disabled = false;
             input.value = '';
             input.focus();
         }
     } else {
-        input.style.borderColor = '#cbd5e1';
+        input.style.borderColor = '';
         statusMsg.textContent = '';
     }
 });
