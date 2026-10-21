@@ -12,11 +12,16 @@
 </head>
 <body>
 
-    <div class="register-container fade-in">
+    <div class="register-container">
 
         {{-- Logo --}}
         <div class="logo">Login Seguro</div>
-        <span class="logo-subtitle">Crea tu cuenta nueva · Cifrado de extremo a extremo</span>
+        <span class="logo-subtitle">Registro de cuenta nueva</span>
+
+        <div class="form-heading">
+            <h2>Crear cuenta</h2>
+            <p>Después de registrarte vas a configurar Google Authenticator.</p>
+        </div>
 
         {{-- Alert --}}
         <div id="alertBox" class="alert hidden"></div>
@@ -40,7 +45,7 @@
 
             {{-- Password --}}
             <div class="form-group">
-                <label for="password">Contraseña segura</label>
+                <label for="password">Contraseña</label>
                 <div class="password-wrapper">
                     <input type="password" id="password" placeholder="••••••••" autocomplete="new-password">
                     <button type="button" id="togglePassword" class="toggle-password" title="Mostrar contraseña" aria-label="Mostrar contraseña">
@@ -56,7 +61,7 @@
 
                 {{-- Password rules --}}
                 <div id="passwordRules" class="password-rules">
-                    <div class="rules-title">Requisitos de la contraseña</div>
+                    <div class="rules-title">La contraseña necesita:</div>
                     <ul class="rules-list">
                         <li id="rule-length" class="rule-item">
                             <svg class="icon-unmet" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
@@ -114,9 +119,9 @@
                 <div id="passwordConfirmationError" class="error-message">Las contraseñas no coinciden.</div>
             </div>
 
-            <button type="submit" class="btn" id="registerBtn">Crear Cuenta</button>
+            <button type="submit" class="btn" id="registerBtn">Crear cuenta</button>
 
-            <a href="/login" class="auth-link">¿Ya tienes cuenta? <span>Inicia Sesión</span></a>
+            <a href="/login" class="auth-link">¿Ya tienes cuenta? <span>Inicia sesión</span></a>
         </form>
     </div>
 

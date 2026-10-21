@@ -16,34 +16,26 @@
 
         {{-- Logo & Badge --}}
         <div class="logo">Login Seguro</div>
-        <span class="badge">Servidor {{ config('app.server_number') }} · Cifrado TLS</span>
+        <span class="badge">Servidor {{ config('app.server_number') }}</span>
 
         {{-- Alerts --}}
         @if (session('error'))
-            <div class="alert alert-error">⚠ {{ session('error') }}</div>
+            <div class="alert alert-error">{{ session('error') }}</div>
             <div id="alertBox" class="alert hidden"></div>
         @elseif ($errors->any())
-            <div class="alert alert-error">⚠ {{ $errors->first() }}</div>
+            <div class="alert alert-error">{{ $errors->first() }}</div>
             <div id="alertBox" class="alert hidden"></div>
         @else
             <div id="alertBox" class="alert hidden"></div>
         @endif
 
-        {{-- Step Indicator --}}
-        <div class="step-indicator" id="stepIndicator">
-            <div class="step-dot active" id="step1">1</div>
-            <div class="step-line" id="line1"></div>
-            <div class="step-dot" id="step2">2</div>
-            <div class="step-line" id="line2"></div>
-            <div class="step-dot" id="step3">3</div>
-        </div>
-
         {{-- PASO 1: Credenciales --}}
-        <form id="loginForm" class="fade-in" method="POST" action="/api/login" novalidate>
+        <form id="loginForm" method="POST" action="/api/login" novalidate>
             @csrf
             <div class="form-heading">
-                <h2>Bienvenido de vuelta</h2>
-                <p>Ingresa tus credenciales para continuar.</p>
+                <span class="step-label">Paso 1 de 3</span>
+                <h2>Iniciar sesión</h2>
+                <p>Entra con tu correo y contraseña.</p>
             </div>
 
             <div class="form-group">
@@ -58,12 +50,10 @@
                 <div id="passwordError" class="error-message">La contraseña es requerida.</div>
             </div>
 
-            <button type="submit" class="btn" id="loginBtn">
-                Iniciar Sesión
-            </button>
+            <button type="submit" class="btn" id="loginBtn">Continuar</button>
 
             <a href="/register" class="auth-link">
-                ¿Sin cuenta? <span>Regístrate aquí</span>
+                ¿No tienes cuenta? <span>Crear una</span>
             </a>
         </form>
 
@@ -71,8 +61,9 @@
         <form id="mfaForm" class="hidden" method="POST" action="/api/mfa/verify" novalidate>
             @csrf
             <div class="form-heading">
-                <h2>Verificación MFA</h2>
-                <p>Abre Google Authenticator e ingresa el código de 6 dígitos de tu cuenta.</p>
+                <span class="step-label">Paso 2 de 3</span>
+                <h2>Código del autenticador</h2>
+                <p>Abre Google Authenticator y escribe el código de 6 dígitos.</p>
             </div>
 
             <div class="form-group">
@@ -81,15 +72,16 @@
                 <div id="mfaError" class="error-message">Código inválido. Inténtalo de nuevo.</div>
             </div>
 
-            <button type="submit" class="btn" id="mfaBtn">Verificar Identidad</button>
+            <button type="submit" class="btn" id="mfaBtn">Verificar</button>
         </form>
 
         {{-- PASO 3: OTP por Correo --}}
         <form id="emailOtpForm" class="hidden" method="POST" action="/api/mfa/email/verify" novalidate>
             @csrf
             <div class="form-heading">
+                <span class="step-label">Paso 3 de 3</span>
                 <h2>Código por correo</h2>
-                <p>Te enviamos un código de 6 dígitos a tu correo electrónico. Revisa tu bandeja de entrada.</p>
+                <p>Te mandamos un código de 6 dígitos. Si no aparece, revisa spam.</p>
             </div>
 
             <div class="form-group">
@@ -98,7 +90,7 @@
                 <div id="emailOtpError" class="error-message">Código inválido. Inténtalo de nuevo.</div>
             </div>
 
-            <button type="submit" class="btn" id="emailOtpBtn">Finalizar Inicio de Sesión</button>
+            <button type="submit" class="btn" id="emailOtpBtn">Entrar</button>
         </form>
     </div>
 
